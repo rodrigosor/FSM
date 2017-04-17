@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSM.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace FSM.DataMiner
     {
         static void Main(string[] args)
         {
+            var respository = new PDBRespository();
+            respository.LoadPDBData(@"C:\Libs\PDB");
         }
     }
 }

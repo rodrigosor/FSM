@@ -54,6 +54,10 @@
       <Project>{5db5803f-3ec4-496a-9c37-11b9261e68e7}</Project>
       <Name>FSM.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FSM.Repository\FSM.Repository.csproj">
+      <Project>{41505a30-3cad-45cd-b38c-83765f726828}</Project>
+      <Name>FSM.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
