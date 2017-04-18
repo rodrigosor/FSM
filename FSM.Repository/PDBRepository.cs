@@ -1,18 +1,15 @@
-﻿using FSM.Common;
-using FSM.Common.Events;
-using FSM.Common.Exceptions;
+﻿using FSM.Common.Exceptions;
 using FSM.Domain;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace FSM.Repository
 {
     public class PDBRepository
     {
-        public event LoadPDBFilesEventHandler LoadPDBFiles;
+        //public event LoadPDBFilesEventHandler LoadPDBFiles;
 
         private string _pdbFilesPath;
 
