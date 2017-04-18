@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Delegates.cs" />
-    <Compile Include="Events\LoadPDBFileToMemoryEventArgs.cs" />
+    <Compile Include="Events\LoadPDBFilesEventArgs.cs" />
     <Compile Include="Exceptions\LoadPDBFileToMemoryException.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

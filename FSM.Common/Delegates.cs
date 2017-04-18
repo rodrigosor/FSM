@@ -2,5 +2,5 @@
 
 namespace FSM.Common
 {
-    public delegate void LoadPDBFileToMemoryEventHandler(LoadPDBFileToMemoryEventArgs e);
+    public delegate void LoadPDBFilesEventHandler(LoadPDBFilesEventArgs e);
 }
