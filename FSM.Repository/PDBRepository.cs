@@ -9,13 +9,17 @@ namespace FSM.Repository
 {
     public class PDBRepository
     {
-        //public event LoadPDBFilesEventHandler LoadPDBFiles;
-
         private string _pdbFilesPath;
 
-        private List<Atom> _buffer;
-
         public IDictionary<string, IList<Atom>> PDB { get; private set; }
+
+        public List<Atom> Atoms
+        {
+            get
+            {
+                return PDB.Values.SelectMany(atoms => atoms.Select(atom => atom)).ToList();
+            }
+        }
 
         public PDBRepository(string path)
         {
@@ -25,7 +29,7 @@ namespace FSM.Repository
 
         private void ProcessLineQueued(dynamic param)
         {
-            _buffer.Add(ProcessLine(param.Line));
+            param.Buffer.Add(ProcessLine(param.Line));
         }
 
         private Atom ProcessLine(string line)
@@ -65,18 +69,20 @@ namespace FSM.Repository
             }
         }
 
-        private IList<Atom> LoadPDBFileToMemory(string path)
+        private void LoadPDBFileToMemory(object path)
         {
-            _buffer = new List<Atom>();
+            var buffer = new List<Atom>();
 
-            var lines = File.ReadAllLines(path).Where(line => line.Length > 0).ToArray();
+            var lines = File.ReadAllLines(path.ToString()).Where(line => line.Length > 0).ToArray();
 
             for (int i = 0; i < lines.Length; i++)
             {
-                System.Threading.ThreadPool.QueueUserWorkItem(ProcessLineQueued, new { Path = path, Line = lines[i], Length = lines.Length, Loaded = i });
+                //System.Threading.ThreadPool.QueueUserWorkItem(ProcessLineQueued, new { Path = path.ToString(), Line = lines[i], Buffer = buffer });
+
+                buffer.Add(ProcessLine(lines[i]));
             }
 
-            return _buffer;
+            PDB.Add(path.ToString(), buffer);
         }
 
         public void LoadPDBFilePaths()
@@ -89,8 +95,9 @@ namespace FSM.Repository
 
                     foreach (var pdbFilePath in pdbFilePaths)
                     {
-                        PDB.Add(pdbFilePath, LoadPDBFileToMemory(pdbFilePath));
-                        //LoadPDBFiles?.Invoke(new LoadPDBFilesEventArgs(pdbFilePath)); // need to improve.
+                        //PDB.Add(pdbFilePath, LoadPDBFileToMemory(pdbFilePath));
+
+                        System.Threading.ThreadPool.QueueUserWorkItem(LoadPDBFileToMemory, pdbFilePath);
                     }
                 }
             }

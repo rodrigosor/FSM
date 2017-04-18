@@ -10,6 +10,7 @@ namespace FSM.DataMiner
             Repository.Instance.LoadPDBFilePaths();
 
             Console.WriteLine(Repository.Instance.PDB.Count());
+            Console.WriteLine(Repository.Instance.Atoms.Count());
 
             Console.ReadKey();
         }
