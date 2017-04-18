@@ -11,8 +11,14 @@ namespace FSM.DataMiner
     {
         static void Main(string[] args)
         {
-            var respository = new PDBRespository();
-            respository.LoadPDBData(@"C:\Libs\PDB");
+            Repository.Instance.LoadPDBFile += OnLoadPDBFile;
+            Repository.Instance.LoadPDBFilePaths();
+        }
+
+        private static void OnLoadPDBFile(Common.Events.LoadPDBFileToMemoryEventArgs e)
+        {
+            Console.Clear();
+            Console.Write("Carregando arquivo {0} ({1}/{2}) ...", e.PDBFilePath, e.Length, e.Loaded);
         }
     }
 }

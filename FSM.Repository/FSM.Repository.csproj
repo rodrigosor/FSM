@@ -40,8 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PDBRespository.cs" />
+    <Compile Include="PDBRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FSM.Common\FSM.Common.csproj">
+      <Project>{fd98c0ea-7836-4536-9552-167eaf8bdbb6}</Project>
+      <Name>FSM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FSM.Domain\FSM.Domain.csproj">
+      <Project>{5db5803f-3ec4-496a-9c37-11b9261e68e7}</Project>
+      <Name>FSM.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
