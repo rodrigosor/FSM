@@ -6,13 +6,19 @@ namespace FSM.DataMiner
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
+            Repository.Instance.LoadPDBFile += OnLoadPDBFile;
+
+            Console.WriteLine("Iniciando carregamento dos arquivos *.pdb");
+
             Repository.Instance.LoadPDBFilePaths();
 
-            Console.WriteLine(Repository.Instance.PDB.Count());
-            Console.WriteLine(Repository.Instance.Atoms.Count());
-
             Console.ReadKey();
+        }
+
+        private static void OnLoadPDBFile(Common.Events.LoadPDBFilesEventArgs e)
+        {
+            Console.WriteLine("Arquivo {0} carregado na memória.", e.PDBFilePath);
         }
     }
 }

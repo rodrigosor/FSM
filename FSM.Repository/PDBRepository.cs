@@ -4,12 +4,16 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using FSM.Common;
+using FSM.Common.Events;
 
 namespace FSM.Repository
 {
     public class PDBRepository
     {
         private string _pdbFilesPath;
+
+        public event LoadPDBFilesEventHandler LoadPDBFile; 
 
         public IDictionary<string, IList<Atom>> PDB { get; private set; }
 
@@ -43,11 +47,11 @@ namespace FSM.Repository
                     atom.RecordName = line.Slice<string>(1, 6);
                     atom.Serial = line.Slice<int>(7, 11);
                     atom.AtomName = line.Slice<string>(13, 16);
-                    atom.AlternateLocation = line.Slice<char>(17, 18);
+                    //atom.AlternateLocation = line.Slice<char>(17, 18);
                     atom.RecordName = line.Slice<string>(18, 20);
-                    atom.ChainID = line.Slice<char>(22, 23);
+                    //atom.ChainID = line.Slice<char>(22, 23);
                     atom.ResidueSequenceNumber = line.Slice<int>(23, 26);
-                    atom.ICode = line.Slice<char>(27, 28);
+                    //atom.ICode = line.Slice<char>(27, 28);
                     atom.X = line.Slice<double>(31, 38);
                     atom.Y = line.Slice<double>(39, 46);
                     atom.Z = line.Slice<double>(47, 54);
@@ -77,8 +81,6 @@ namespace FSM.Repository
 
             for (int i = 0; i < lines.Length; i++)
             {
-                //System.Threading.ThreadPool.QueueUserWorkItem(ProcessLineQueued, new { Path = path.ToString(), Line = lines[i], Buffer = buffer });
-
                 buffer.Add(ProcessLine(lines[i]));
             }
 
@@ -95,9 +97,9 @@ namespace FSM.Repository
 
                     foreach (var pdbFilePath in pdbFilePaths)
                     {
-                        //PDB.Add(pdbFilePath, LoadPDBFileToMemory(pdbFilePath));
+                        LoadPDBFileToMemory(pdbFilePath);
 
-                        System.Threading.ThreadPool.QueueUserWorkItem(LoadPDBFileToMemory, pdbFilePath);
+                        LoadPDBFile?.Invoke(new LoadPDBFilesEventArgs(pdbFilePath));
                     }
                 }
             }
