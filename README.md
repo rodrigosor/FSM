@@ -1,4 +1,4 @@
-### Centro Universitário de Belo Horizonte - UNIBH<br>Departamento de Ciências Exatas e de Tecnologia<br>Ciência da Computação<br>Tópicos Especiais A<br>Prof. Valdete Maria Gonçalves de Almeida
+#### Centro Universitário de Belo Horizonte - UNIBH<br>Departamento de Ciências Exatas e de Tecnologia<br>Ciência da Computação<br>Tópicos Especiais A<br>Prof. Valdete Maria Gonçalves de Almeida
 
 # Frequent Subgraph Mining
 
