@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using FSM.Common;
 using FSM.Common.Events;
+using FSM.Common.Maths;
 
 namespace FSM.Repository
 {
@@ -50,6 +51,7 @@ namespace FSM.Repository
                     atom.Id = line.Slice<int>(7, 11);
                     atom.Name = line.Slice<string>(13, 16);
                     atom.Residue = line.Slice<string>(18, 20);
+                    atom.Chain = line.Slice<char>(22, 22);
                     atom.X = line.Slice<double>(31, 38);
                     atom.Y = line.Slice<double>(39, 46);
                     atom.Z = line.Slice<double>(47, 54);
@@ -105,6 +107,43 @@ namespace FSM.Repository
                         string.Format("Cannot read *.pdb files from \"{0}\"", _pdbFilesPath), ex
                     );
             }
+        }
+
+        public IList<PDB> CalculateMolecularInteractivityInterface()
+        {
+            var result = new List<PDB>(PDB);
+
+            result.Clear();
+
+            foreach (var pdb in PDB)
+            {
+                var atoms = pdb.Atoms.Where(
+                        atom => atom.Type.Equals(AtomType.ATOM)
+                    );
+                var hetatoms = pdb.Atoms.Where(
+                        atom => atom.Type.Equals(AtomType.HETATM)
+                    );
+
+                foreach (var atom in atoms)
+                {
+                    foreach (var hetatom in hetatoms)
+                    {
+                        var distance = Formulas.EuclideanDistance(atom, hetatom);
+
+                        if (distance <= 7.0d)
+                        {
+                            pdb.Atoms.Add(atom);
+                        }
+                    }
+                }
+
+                if (pdb.HasAtoms)
+                {
+                    result.Add(pdb);
+                }
+            }
+
+            return result;
         }
     }
 }

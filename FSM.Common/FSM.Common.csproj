@@ -45,9 +45,16 @@
     <Compile Include="Events\LoadPDBFilesEventArgs.cs" />
     <Compile Include="Exceptions\LoadPDBFileToMemoryException.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Maths\Formulas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FSM.Domain\FSM.Domain.csproj">
+      <Project>{5db5803f-3ec4-496a-9c37-11b9261e68e7}</Project>
+      <Name>FSM.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public AtomType Type { get; set; }
+        public char Chain { get; set; }
         public string Residue { get; set; }
         public double X { get; set; }
         public double Y { get; set; }

@@ -22,6 +22,8 @@ namespace FSM.DataMiner
         {
             Console.Clear();
             Console.WriteLine("{0} arquivo(s) *.pdb carregado(s) na memória.", e.PDBFilesLoaded);
+            Console.WriteLine("Calculando Interface de Interação Molecular.");
+            var result = Repository.Instance.CalculateMolecularInteractivityInterface();
         }
 
     }

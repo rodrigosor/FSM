@@ -2,9 +2,10 @@
 
 namespace FSM.Domain
 {
-    public class PDB
+    public partial class PDB
     {
         public string Path { get; private set; }
+
         public IList<Atom> Atoms { get; private set; }
 
         public PDB(string path, IList<Atom> atoms)
