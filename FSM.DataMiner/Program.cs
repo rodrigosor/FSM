@@ -14,6 +14,8 @@ namespace FSM.DataMiner
             Console.WriteLine("Iniciando carregamento dos arquivos *.pdb");
 
             Repository.Instance.LoadPDBFilePaths();
+
+            Console.ReadKey();
         }
 
         private static void OnLoadComplete(LoadAllPDBFilesEventArgs e)

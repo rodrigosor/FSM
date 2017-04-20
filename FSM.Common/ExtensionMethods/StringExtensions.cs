@@ -37,5 +37,10 @@ namespace FSM
             var length = (endColumn - startColumn) + 1;
             return value.Substring<T>((startColumn - 1), length);
         }
+
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value.Trim(), true);
+        }
     }
 }

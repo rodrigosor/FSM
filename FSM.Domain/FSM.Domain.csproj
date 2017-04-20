@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atom.cs" />
+    <Compile Include="AtomType.cs" />
     <Compile Include="PDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

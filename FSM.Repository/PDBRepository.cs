@@ -17,19 +17,19 @@ namespace FSM.Repository
 
         public event LoadAllPDBFilesEventHandler LoadComplete;
 
-        public IDictionary<string, IList<Atom>> PDB { get; private set; }
+        public List<PDB> PDB { get; private set; }
 
         public List<Atom> Atoms
         {
             get
             {
-                return PDB.Values.SelectMany(atoms => atoms.Select(atom => atom)).ToList();
+                return PDB.SelectMany(pdb => pdb.Atoms).ToList();
             }
         }
 
         public PDBRepository(string path)
         {
-            PDB = new Dictionary<string, IList<Atom>>();
+            PDB = new List<PDB>();
             _pdbFilesPath = path;
         }
 
@@ -46,21 +46,13 @@ namespace FSM.Repository
                 {
                     var atom = new Atom();
 
-                    atom.RecordName = line.Slice<string>(1, 6);
-                    atom.Serial = line.Slice<int>(7, 11);
-                    atom.AtomName = line.Slice<string>(13, 16);
-                    atom.AlternateLocation = line.Slice<char>(17, 17);
-                    atom.RecordName = line.Slice<string>(18, 20);
-                    atom.ChainID = line.Slice<char>(22, 22);
-                    atom.ResidueSequenceNumber = line.Slice<int>(23, 26);
-                    atom.ICode = line.Slice<char>(27, 27);
+                    atom.Type = line.Slice<string>(1, 6).ToEnum<AtomType>();
+                    atom.Id = line.Slice<int>(7, 11);
+                    atom.Name = line.Slice<string>(13, 16);
+                    atom.Residue = line.Slice<string>(18, 20);
                     atom.X = line.Slice<double>(31, 38);
                     atom.Y = line.Slice<double>(39, 46);
                     atom.Z = line.Slice<double>(47, 54);
-                    atom.Occupancy = line.Slice<double>(55, 60);
-                    atom.TemperatureFactor = line.Slice<double>(61, 66);
-                    atom.ElementSymbol = line.Slice<string>(77, 78);
-                    atom.Charge = line.Slice<string>(79, 80);
 
                     return atom;
                 }
@@ -86,7 +78,7 @@ namespace FSM.Repository
                 buffer.Add(ProcessLine(lines[i]));
             }
 
-            PDB.Add(path.ToString(), buffer);
+            PDB.Add(new PDB(path.ToString(), buffer));
         }
 
         public void LoadPDBFilePaths()
