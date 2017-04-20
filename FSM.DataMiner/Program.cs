@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSM.Common.Events;
+using System;
 using System.Linq;
 
 namespace FSM.DataMiner
@@ -7,18 +8,19 @@ namespace FSM.DataMiner
     {
         static void Main(string[] args)
         {
-            Repository.Instance.LoadPDBFile += OnLoadPDBFile;
+            Repository.Instance.LoadComplete += OnLoadComplete;
 
+            Console.WriteLine("FSM v.0.0.1");
             Console.WriteLine("Iniciando carregamento dos arquivos *.pdb");
 
             Repository.Instance.LoadPDBFilePaths();
-
-            Console.ReadKey();
         }
 
-        private static void OnLoadPDBFile(Common.Events.LoadPDBFilesEventArgs e)
+        private static void OnLoadComplete(LoadAllPDBFilesEventArgs e)
         {
-            Console.WriteLine("Arquivo {0} carregado na memória.", e.PDBFilePath);
+            Console.Clear();
+            Console.WriteLine("{0} arquivo(s) *.pdb carregado(s) na memória.", e.PDBFilesLoaded);
         }
+
     }
 }

@@ -13,7 +13,9 @@ namespace FSM.Repository
     {
         private string _pdbFilesPath;
 
-        public event LoadPDBFilesEventHandler LoadPDBFile; 
+        public event LoadPDBFilesEventHandler LoadPDBFile;
+
+        public event LoadAllPDBFilesEventHandler LoadComplete;
 
         public IDictionary<string, IList<Atom>> PDB { get; private set; }
 
@@ -47,11 +49,11 @@ namespace FSM.Repository
                     atom.RecordName = line.Slice<string>(1, 6);
                     atom.Serial = line.Slice<int>(7, 11);
                     atom.AtomName = line.Slice<string>(13, 16);
-                    //atom.AlternateLocation = line.Slice<char>(17, 18);
+                    atom.AlternateLocation = line.Slice<char>(17, 17);
                     atom.RecordName = line.Slice<string>(18, 20);
-                    //atom.ChainID = line.Slice<char>(22, 23);
+                    atom.ChainID = line.Slice<char>(22, 22);
                     atom.ResidueSequenceNumber = line.Slice<int>(23, 26);
-                    //atom.ICode = line.Slice<char>(27, 28);
+                    atom.ICode = line.Slice<char>(27, 27);
                     atom.X = line.Slice<double>(31, 38);
                     atom.Y = line.Slice<double>(39, 46);
                     atom.Z = line.Slice<double>(47, 54);
@@ -101,6 +103,8 @@ namespace FSM.Repository
 
                         LoadPDBFile?.Invoke(new LoadPDBFilesEventArgs(pdbFilePath));
                     }
+
+                    LoadComplete?.Invoke(new LoadAllPDBFilesEventArgs(PDB.Count(), Atoms.Count()));
                 }
             }
             catch (Exception ex)
