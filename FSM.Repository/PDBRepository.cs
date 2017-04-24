@@ -45,18 +45,17 @@ namespace FSM.Repository
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    var atom = new Atom();
-
-                    atom.Type = line.Slice<string>(1, 6).ToEnum<AtomType>();
-                    atom.Id = line.Slice<int>(7, 11);
-                    atom.Name = line.Slice<string>(13, 16);
-                    atom.Residue = line.Slice<string>(18, 20);
-                    atom.Chain = line.Slice<char>(22, 22);
-                    atom.X = line.Slice<double>(31, 38);
-                    atom.Y = line.Slice<double>(39, 46);
-                    atom.Z = line.Slice<double>(47, 54);
-
-                    return atom;
+                    return new Atom()
+                    {
+                        Type = line.Slice<string>(1, 6).ToEnum<AtomType>(),
+                        Id = line.Slice<int>(7, 11),
+                        Name = line.Slice<string>(13, 16),
+                        Residue = line.Slice<string>(18, 20),
+                        Chain = line.Slice<char>(22, 22),
+                        X = line.Slice<double>(31, 38),
+                        Y = line.Slice<double>(39, 46),
+                        Z = line.Slice<double>(47, 54)
+                    };
                 }
 
                 return null;
