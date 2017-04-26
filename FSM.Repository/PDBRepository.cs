@@ -18,6 +18,8 @@ namespace FSM.Repository
 
         public event LoadAllPDBFilesEventHandler LoadComplete;
 
+        public event CalculateCompleteEventHandler CalculateComplete;
+
         public List<PDB> PDB { get; private set; }
 
         public List<Atom> Atoms
@@ -108,7 +110,7 @@ namespace FSM.Repository
             }
         }
 
-        public IList<PDB> CalculateMolecularInteractivityInterface()
+        public void CalculateMolecularInteractivityInterface()
         {
             var result = new List<PDB>(PDB);
 
@@ -142,7 +144,7 @@ namespace FSM.Repository
                 }
             }
 
-            return result;
+            CalculateComplete?.Invoke(new CalculateCompleteEventArgs(result));
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace FSM.Common.Events
+﻿using System;
+
+namespace FSM.Common.Events
 {
-    public class LoadAllPDBFilesEventArgs
+    public class LoadAllPDBFilesEventArgs : EventArgs
     {
         public int PDBFilesLoaded { get; private set; }
         public int AtomsLoaded { get; set; }
