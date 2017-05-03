@@ -10,4 +10,4 @@ Edital do TP | http://d3m21rn3ib0riu.cloudfront.net/PAT/Upload/1911877/FaseIIImo
 Documentação dos arquivos *.pdb | http://www.wwpdb.org/documentation/file-format-content/format33/sect9.html#ATOM
 Documentação Adicional |  https://www.csc2.ncsu.edu/faculty/nfsamato/practical-graph-mining-with-R/slides/pdf/Frequent_Subgraph_Mining.pdf
 
-#####Alunos<br>Rodrigo Reis<br>Igor Bueloni<br>Wendell Ronald<br>Ivan Paulovich
+####Alunos<br>Rodrigo Reis<br>Igor Bueloni<br>Wendell Ronald<br>Ivan Paulovich
