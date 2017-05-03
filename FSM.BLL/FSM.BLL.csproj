@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF496378-ED1B-4170-9136-17FE8902196C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{820CAE01-160E-4401-84A3-1B9E5BC4B6DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FSM.DataMiner</RootNamespace>
-    <AssemblyName>FSM.DataMiner</AssemblyName>
+    <RootNamespace>FSM.BLL</RootNamespace>
+    <AssemblyName>FSM.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,20 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="PDBBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FSM.BLL\FSM.BLL.csproj">
-      <Project>{820cae01-160e-4401-84a3-1b9e5bc4b6da}</Project>
-      <Name>FSM.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FSM.Common\FSM.Common.csproj">
       <Project>{fd98c0ea-7836-4536-9552-167eaf8bdbb6}</Project>
       <Name>FSM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FSM.DAL\FSM.DAL.csproj">
+      <Project>{0d84e89b-20ef-4664-a7f0-f55e97a8a622}</Project>
+      <Name>FSM.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\FSM.Domain\FSM.Domain.csproj">
       <Project>{5db5803f-3ec4-496a-9c37-11b9261e68e7}</Project>
@@ -65,11 +60,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
